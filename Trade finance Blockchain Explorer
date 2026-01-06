@@ -1,0 +1,64 @@
+📁 Folder Name
+Trade-Finance-Blockchain-Explorer
+1️⃣ app.py
+from flask import Flask, render_template
+
+app = Flask(__name__)
+
+blocks = [
+    {"index": 1, "sender": "Bank A", "receiver": "Exporter", "amount": "₹50,000", "status": "Approved"},
+    {"index": 2, "sender": "Importer", "receiver": "Bank B", "amount": "₹75,000", "status": "Pending"},
+    {"index": 3, "sender": "Bank C", "receiver": "Importer", "amount": "₹30,000", "status": "Completed"},
+]
+
+@app.route("/")
+def home():
+    return render_template("index.html", blocks=blocks)
+
+if __name__ == "__main__":
+    app.run(debug=True)
+templates/index.html
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Trade Finance Blockchain Explorer</title>
+    <style>
+        body {font-family: Arial; background: #f2f2f2;}
+        h1 {text-align:center;}
+        table {margin:auto; background:white;}
+        th,td {padding:10px; border:1px solid black;}
+    </style>
+</head>
+<body>
+    <h1>Trade Finance Blockchain Explorer</h1>
+    <table>
+        <tr>
+            <th>Block</th>
+            <th>Sender</th>
+            <th>Receiver</th>
+            <th>Amount</th>
+            <th>Status</th>
+        </tr>
+        {% for block in blocks %}
+        <tr>
+            <td>{{block.index}}</td>
+            <td>{{block.sender}}</td>
+            <td>{{block.receiver}}</td>
+            <td>{{block.amount}}</td>
+            <td>{{block.status}}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>
+requirements.txt
+flask
+README.md
+# Trade Finance Blockchain Explorer
+
+This project displays trade finance transactions in blockchain style using Flask.
+
+Steps to run:
+1. pip install flask
+2. python app.py
+3. Open browser and go to http://127.0.0.1:5000/
